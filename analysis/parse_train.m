@@ -17,7 +17,7 @@ i=1;
 j=1;
 while ischar(tline)
     % First find the accuracy line
-    k = strfind(tline, 'Test net output');
+    k = strfind(tline, 'Test net output #0');
     if (k)
         k = strfind(tline, 'accuracy');
         if (k)
@@ -38,16 +38,10 @@ while ischar(tline)
         
         % Concatenation of two string
         res_str = strcat(str2, str);
+	fprintf(fid_accuracy, '%s\r\n', res_str);
         num=str2double(str);
-        if (i == 1)
-            fprintf(fid_accuracy, '%s\r\n', res_str);
-            accuracy(i) = num;
-            i=i+1;
-        elseif (num ~= accuracy(length(accuracy)))
-            fprintf(fid_accuracy, '%s\r\n', res_str);
-            accuracy(i) = num;
-            i=i+1;
-        end
+        accuracy(i) = num;
+        i=i+1;
     end
    
     % Then find the loss line
